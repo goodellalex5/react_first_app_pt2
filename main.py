@@ -60,7 +60,7 @@ def get_users():
     if request.method == 'GET':
         search_username = request.args.get('name')
         if search_username:
-            subdict = {users_list: []}
+            subdict = {'users_list': []}
             for user in users['users_list']:
                 if user['name'] == search_username:
                     subdict['users_list'].append(user)
@@ -69,6 +69,8 @@ def get_users():
     elif request.method == 'POST':
         userToAdd = request.get_json()
         new_id = random.randint(0, 1000000)
-        users['users_list'].append(userToAdd.update({'id':new_id}))
+        full = userToAdd.update({'id':new_id})
+        print(userToAdd)
+        users['users_list'].append(full)
         resp = jsonify(success=True)
-        return '', 201
+        return userToAdd, 201
