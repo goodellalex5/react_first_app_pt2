@@ -12,17 +12,20 @@ removeCharacter = index => {
 	
 	this.setState({
 		characters: characters.filter((character, i) => {
-		return i !== index}),
+		return i !== index;}),
 	})
 	}
-	
+
+	handleSubmit = person => {
+	this.setState({characters: [...this.state.characters,person]})
+	}
 	render(){
-		const {characters } = this.state
+		const {characters } = this.state;
 		
 		return(
 		<div className = "container">
 		<Table characterData = {characters} removeCharacter = {this.removeCharacter} />
-		<Form />
+		<Form handleSubmit = {this.handleSubmit}/>
 		</div>
 		)
 	}
